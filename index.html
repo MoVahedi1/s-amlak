@@ -9,15 +9,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap');
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html {
+            font-size: 16px; /* پایه فونت استاندارد */
+        }
         body {
             font-family: 'Vazirmatn', sans-serif;
             background: #000;
             color: #e2e8f0;
             overflow-x: hidden;
+            font-size: 1rem; /* فونت بدنه استاندارد */
         }
-
         /* پس‌زمینه متحرک با sample.jpg */
         .bg-animation {
             position: fixed;
@@ -44,7 +46,6 @@
             0% { transform: translateY(0) scale(1.05); }
             100% { transform: translateY(-30%) scale(1.1); }
         }
-
         /* نوار بالا با افکت شیشه‌ای و نور */
         .navbar {
             position: fixed;
@@ -55,17 +56,16 @@
             background: rgba(10, 10, 30, 0.4);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(139, 92, 246, 0.2);
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             transition: all 0.4s;
         }
         .navbar.scrolled {
-            padding: 1rem 0;
+            padding: 0.75rem 0;
             background: rgba(10, 10, 30, 0.85);
         }
-
         .logo {
             font-family: 'Cinzel', serif;
-            font-size: 2.8rem;
+            font-size: 1.875rem;
             font-weight: 900;
             background: linear-gradient(45deg, #f59e0b, #fbbf24, #fde047, #f59e0b);
             -webkit-background-clip: text;
@@ -73,11 +73,10 @@
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 40px rgba(251, 191, 36, 0.5);
         }
-
         /* کارت ملک با Default.png */
         .property-card {
             position: relative;
-            border-radius: 28px;
+            border-radius: 1.25rem;
             overflow: hidden;
             background: rgba(15, 15, 35, 0.6);
             backdrop-filter: blur(12px);
@@ -90,7 +89,7 @@
             border-color: #a78bfa;
         }
         .property-img {
-            height: 340px;
+            height: 16rem;
             background: url('Default.png') center/cover no-repeat;
             position: relative;
         }
@@ -100,27 +99,25 @@
             inset: 0;
             background: linear-gradient(to top, #000 0%, transparent 50%);
         }
-
-        .price-glow {
-            font-size: 2.8rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #f59e0b, #fbbf24, #fde047);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(251, 191, 36, 0.6);
-        }
-
         .btn-premium {
             background: linear-gradient(45deg, #8b5cf6, #ec4899);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1rem;
             box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
             transition: all 0.4s;
         }
         .btn-premium:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 60px rgba(236, 72, 153, 0.8);
+        }
+        /* تغییر اندازه دکمه "تماس با مشاور VIP" در موبایل به نصف */
+        @media (max-width: 1023px) { /* lg و پایین‌تر */
+            .btn-nav-contact {
+                padding: 0.5rem 1rem !important;   /* نصف پدینگ فعلی (از 0.75rem 1.5rem به تقریباً نصف) */
+                font-size: 0.875rem !important;   /* 14px به جای 16px */
+            }
         }
 
         .fade-in {
@@ -135,45 +132,42 @@
     </style>
 </head>
 <body class="relative">
-
     <!-- پس‌زمینه متحرک با sample.jpg -->
     <div class="bg-animation"></div>
-
     <!-- نوار بالا -->
     <nav class="navbar" id="navbar">
-        <div class="container mx-auto px-8 flex justify-between items-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <div class="logo">فیروزکوه</div>
-            <div class="hidden lg:flex items-center gap-10 text-lg font-medium">
+            <div class="hidden lg:flex items-center gap-6 text-base font-medium">
                 <a href="#" class="hover:text-amber-400 transition">خانه</a>
                 <a href="#" class="hover:text-amber-400 transition">املاک لوکس</a>
                 <a href="#" class="hover:text-amber-400 transition">اجاره</a>
                 <a href="#" class="hover:text-amber-400 transition">درباره ما</a>
             </div>
-            <button class="btn-premium text-white">تماس با مشاور VIP</button>
+            <!-- کلاس اختصاصی برای دکمه تماس در نوار بالا -->
+            <button class="btn-premium btn-nav-contact text-white">تماس با مشاور VIP</button>
         </div>
     </nav>
-
     <!-- هیرو -->
-    <section class="relative min-h-screen flex items-center justify-center text-center px-6 pt-32">
+    <section class="relative min-h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-20 lg:pt-32">
         <div class="max-w-6xl mx-auto">
-            <h1 class="text-6xl md:text-8xl font-black leading-tight mb-8 fade-in">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight mb-6 fade-in">
                 <span class="block text-amber-400 drop-shadow-2xl">خانه‌ای فراتر از رویاهات</span>
                 <span class="block text-white">در انتظار توست</span>
             </h1>
-            <p class="text-2xl md:text-3xl mb-12 opacity-90 fade-in">فقط برای کسانی که بهترین‌ها را می‌خواهند</p>
-
+            <p class="text-lg sm:text-xl md:text-2xl mb-10 opacity-90 fade-in">فقط برای کسانی که بهترین‌ها را می‌خواهند</p>
             <div class="max-w-4xl mx-auto fade-in">
-                <div class="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        <input type="text" placeholder="تهران، زعفرانیه، لواسان..." class="p-5 bg-white/10 rounded-2xl border border-white/20 focus:border-amber-400 focus:outline-none text-lg">
-                        <select class="p-5 bg-white/10 rounded-2xl border border-white/20 focus:border-amber-400 focus:outline-none text-lg">
+                <div class="bg-white/5 backdrop-blur-xl rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10 shadow-2xl">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <input type="text" placeholder="تهران، زعفرانیه، لواسان..." class="p-3 sm:p-4 bg-white/10 rounded-xl border border-white/20 focus:border-amber-400 focus:outline-none text-base">
+                        <select class="p-3 sm:p-4 bg-white/10 rounded-xl border border-white/20 focus:border-amber-400 focus:outline-none text-base">
                             <option>نوع ملک</option>
                             <option>پنت‌هاوس</option>
                             <option>ویلا</option>
                             <option>خانه باغ</option>
                         </select>
-                        <input type="text" placeholder="از ۵ تا ۱۰۰ میلیارد" class="p-5 bg-white/10 rounded-2xl border border-white/20 focus:border-amber-400 focus:outline-none text-lg">
-                        <button class="btn-premium text-white text-xl font-bold">
+                        <input type="text" placeholder="از ۵ تا ۱۰۰ میلیارد" class="p-3 sm:p-4 bg-white/10 rounded-xl border border-white/20 focus:border-amber-400 focus:outline-none text-base">
+                        <button class="btn-premium text-white font-semibold">
                             پیدا کن
                         </button>
                     </div>
@@ -181,73 +175,66 @@
             </div>
         </div>
     </section>
-
     <!-- املاک لوکس -->
-    <section class="container mx-auto px-8 py-24">
-        <h2 class="text-5xl md:text-7xl font-black text-center mb-20 fade-in">
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-center mb-12 lg:mb-20 fade-in">
             <span class="text-amber-400">املاک</span> <span class="text-white">استثنایی</span>
         </h2>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             <!-- ملک ۱ -->
             <div class="property-card fade-in">
                 <div class="property-img">
-                    <div class="absolute top-6 right-6 bg-gradient-to-r from-amber-400 to-orange-500 text-black px-6 py-3 rounded-full font-bold shadow-lg">
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-amber-400 to-orange-500 text-black px-4 py-2 rounded-full font-semibold shadow-lg text-base">
                         ۴۸ میلیارد
                     </div>
                 </div>
-                <div class="p-8">
-                    <h3 class="text-3xl font-bold mb-4">پنت‌هاوس الماس زعفرانیه</h3>
-                    <p class="text-lg opacity-80 mb-6">۵۵۰ متر • تراس ۲۰۰ متری • ویو ۳۶۰ درجه تهران</p>
-                    <button class="w-full btn-premium py-5 text-xl font-bold">مشاهده اختصاصی</button>
+                <div class="p-6 lg:p-8">
+                    <h3 class="text-2xl lg:text-3xl font-bold mb-3 lg:mb-4">پنت‌هاوس الماس زعفرانیه</h3>
+                    <p class="text-base opacity-80 mb-4 lg:mb-6">۵۵۰ متر • تراس ۲۰۰ متری • ویو ۳۶۰ درجه تهران</p>
+                    <button class="w-full btn-premium py-3 lg:py-4 text-base lg:text-lg font-semibold">مشاهده اختصاصی</button>
                 </div>
             </div>
-
             <!-- ملک ۲ -->
             <div class="property-card fade-in">
                 <div class="property-img">
-                    <div class="absolute top-6 right-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-full font-bold shadow-lg">
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full font-semibold shadow-lg text-base">
                         ۱۱۰ میلیارد
                     </div>
                 </div>
-                <div class="p-8">
-                    <h3 class="text-3xl font-bold mb-4">ویلا رویال لواسان</h3>
-                    <p class="text-lg opacity-80 mb-6">۲۰۰۰ متر باغ • استخر بی‌نهایت • هلی‌پد</p>
-                    <button class="w-full btn-premium py-5 text-xl font-bold">تور مجازی</button>
+                <div class="p-6 lg:p-8">
+                    <h3 class="text-2xl lg:text-3xl font-bold mb-3 lg:mb-4">ویلا رویال لواسان</h3>
+                    <p class="text-base opacity-80 mb-4 lg:mb-6">۲۰۰۰ متر باغ • استخر بی‌نهایت • هلی‌پد</p>
+                    <button class="w-full btn-premium py-3 lg:py-4 text-base lg:text-lg font-semibold">تور مجازی</button>
                 </div>
             </div>
-
             <!-- ملک ۳ -->
             <div class="property-card fade-in">
                 <div class="property-img">
-                    <div class="absolute top-6 right-6 bg-gradient-to-r from-emerald-400 to-teal-500 text-black px-6 py-3 rounded-full font-bold shadow-lg">
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-emerald-400 to-teal-500 text-black px-4 py-2 rounded-full font-semibold shadow-lg text-base">
                         ۳۵ میلیارد
                     </div>
                 </div>
-                <div class="p-8">
-                    <h3 class="text-3xl font-bold mb-4">خانه باغ فرشته</h3>
-                    <p class="text-lg opacity-80 mb-6">۱۲۰۰ متر زمین • بازسازی لوکس • استخر سرپوشیده</p>
-                    <button class="w-full btn-premium py-5 text-xl font-bold">تماس فوری</button>
+                <div class="p-6 lg:p-8">
+                    <h3 class="text-2xl lg:text-3xl font-bold mb-3 lg:mb-4">خانه باغ فرشته</h3>
+                    <p class="text-base opacity-80 mb-4 lg:mb-6">۱۲۰۰ متر زمین • بازسازی لوکس • استخر سرپوشیده</p>
+                    <button class="w-full btn-premium py-3 lg:py-4 text-base lg:text-lg font-semibold">تماس فوری</button>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- فوتر -->
-    <footer class="bg-gradient-to-t from-black to-purple-950 py-20 border-t border-purple-800">
-        <div class="container mx-auto px-8 text-center">
-            <h1 class="logo text-6xl mb-6">فیروزکوه</h1>
-            <p class="text-2xl mb-10 opacity-80">تنها آدرس املاک لوکس و استثنایی ایران</p>
-            <button class="btn-premium text-2xl px-16 py-6">مشاوره خصوصی ۲۴ ساعته</button>
-            <p class="mt-12 text-sm opacity-60">© ۱۴۰۴ املاک فیروزکوه — تجربه‌ای فراتر از مالکیت</p>
+    <footer class="bg-gradient-to-t from-black to-purple-950 py-12 lg:py-20 border-t border-purple-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="logo text-4xl lg:text-5xl mb-4 lg:mb-6">فیروزکوه</h1>
+            <p class="text-lg lg:text-xl mb-6 lg:mb-10 opacity-80">تنها آدرس املاک لوکس و استثنایی ایران</p>
+            <button class="btn-premium text-base lg:text-lg px-8 lg:px-12 py-3 lg:py-4">مشاوره خصوصی ۲۴ ساعته</button>
+            <p class="mt-8 lg:mt-12 text-sm opacity-60">© ۱۴۰۴ املاک فیروزکوه — تجربه‌ای فراتر از مالکیت</p>
         </div>
     </footer>
-
     <script>
         window.addEventListener('scroll', () => {
             document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 100);
         });
-
         const elements = document.querySelectorAll('.fade-in');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
