@@ -21,7 +21,7 @@
                             100: '#fbf3db',
                             300: '#f0dfa8',
                             400: '#e4c465',
-                            500: '#d4af37', // Classic Gold
+                            500: '#d4af37',
                             600: '#aa8c2c',
                         },
                         dark: {
@@ -47,36 +47,37 @@
             overflow-x: hidden;
         }
 
-        /* پس‌زمینه ساده تیره */
+        /* پس‌زمینه با تصویر لوکس */
         .hero-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #050505; /* اگر عکس پس‌زمینه هم می‌خواهید default.png باشد اینجا تغییر دهید */
             z-index: -2;
         }
+        .hero-bg img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: brightness(0.3) blur(2px); /* تاریک و کمی مات برای خوانایی متن */
+            transform: scale(1.1);
+        }
         
-        /* شیشه‌ای مدرن */
         .glass-panel {
-            background: rgba(20, 20, 30, 0.65);
+            background: rgba(20, 20, 30, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
 
         .glass-input {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
             transition: all 0.3s;
         }
         .glass-input:focus {
-            background: rgba(0, 0, 0, 0.5);
             border-color: #d4af37;
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
-        /* لوگو */
         .logo-text {
             font-family: 'Cinzel', serif;
             background: linear-gradient(to right, #fbf3db, #d4af37, #fbf3db);
@@ -86,11 +87,8 @@
             text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
         }
 
-        /* دکمه لوکس */
         .btn-gold {
             background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
-            position: relative;
-            overflow: hidden;
             transition: all 0.4s;
         }
         .btn-gold:hover {
@@ -110,13 +108,11 @@
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* کارت ملک */
         .property-card:hover { transform: translateY(-10px); }
         .property-card:hover .card-img { transform: scale(1.1); }
         .card-img-container { overflow: hidden; border-radius: 1rem 1rem 0 0; }
         .card-img { transition: transform 0.7s ease; }
 
-        /* Swiper Customization */
         .swiper-pagination-bullet { background: #fff; opacity: 0.5; }
         .swiper-pagination-bullet-active { background: #d4af37; opacity: 1; width: 24px; border-radius: 4px; transition: width 0.3s; }
         
@@ -126,7 +122,9 @@
 </head>
 <body class="antialiased selection:bg-gold-500 selection:text-black">
 
-    <div class="hero-bg"></div>
+    <div class="hero-bg">
+        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop" alt="Luxury Background">
+    </div>
 
     <nav class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-black/80 backdrop-blur-md" id="navbar">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -156,10 +154,6 @@
     </nav>
 
     <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 relative">
-        <div class="absolute inset-0 z-[-1] opacity-30">
-            <img src="default.png" class="w-full h-full object-cover blur-sm">
-        </div>
-
         <div class="max-w-5xl mx-auto space-y-6 fade-up relative z-10">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
                 <span class="text-white drop-shadow-xl">رویای زندگی در</span><br>
@@ -211,7 +205,7 @@
         </div>
     </section>
 
-    <section class="relative py-20 bg-dark-900">
+    <section class="relative py-20 bg-dark-900/80 backdrop-blur-sm">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12 fade-up">
                 <h2 class="text-3xl md:text-4xl font-black text-white mb-2">املاک <span class="text-gold-500">برگزیده</span></h2>
@@ -223,7 +217,7 @@
                     <div class="swiper-slide h-auto">
                         <div class="glass-panel rounded-2xl p-3 property-card h-full flex flex-col">
                             <div class="card-img-container h-64 relative">
-                                <img src="default.png" class="card-img w-full h-full object-cover">
+                                <img src="https://images.unsplash.com/photo-1600596542815-2435db9c6ef7?q=80&w=600&auto=format&fit=crop" class="card-img w-full h-full object-cover">
                                 <div class="absolute bottom-4 left-4 bg-gold-500 text-black px-3 py-1 rounded-lg text-sm font-black shadow-lg">
                                     ۱۸۰ میلیارد
                                 </div>
@@ -241,7 +235,7 @@
                     <div class="swiper-slide h-auto">
                         <div class="glass-panel rounded-2xl p-3 property-card h-full flex flex-col">
                             <div class="card-img-container h-64 relative">
-                                <img src="default.png" class="card-img w-full h-full object-cover">
+                                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=600&auto=format&fit=crop" class="card-img w-full h-full object-cover">
                                 <div class="absolute bottom-4 left-4 bg-gold-500 text-black px-3 py-1 rounded-lg text-sm font-black shadow-lg">
                                     ۹۵ میلیارد
                                 </div>
@@ -259,7 +253,7 @@
                      <div class="swiper-slide h-auto">
                         <div class="glass-panel rounded-2xl p-3 property-card h-full flex flex-col">
                             <div class="card-img-container h-64 relative">
-                                <img src="default.png" class="card-img w-full h-full object-cover">
+                                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=600&auto=format&fit=crop" class="card-img w-full h-full object-cover">
                                 <div class="absolute bottom-4 left-4 bg-gold-500 text-black px-3 py-1 rounded-lg text-sm font-black shadow-lg">
                                     ۴۲۰ میلیارد
                                 </div>
@@ -291,7 +285,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Search Toggle for Mobile
         function toggleSearch() {
             const container = document.getElementById('search-container');
             const arrow = document.getElementById('search-arrow');
@@ -305,7 +298,6 @@
             }
         }
 
-        // Mobile Menu
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             if(menu.classList.contains('translate-x-full')) {
@@ -315,7 +307,6 @@
             }
         }
 
-        // Animation on Scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -326,7 +317,6 @@
 
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-        // Swiper Config
         new Swiper(".mySwiper", {
             slidesPerView: 1,
             spaceBetween: 30,
@@ -348,4 +338,3 @@
     </script>
 </body>
 </html>
-```
