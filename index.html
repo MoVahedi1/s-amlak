@@ -121,7 +121,6 @@
                 padding: 0.5rem 1rem !important;
                 font-size: 0.875rem !important;
             }
-            /* موبایل: عکس‌ها کوچکتر و تنظیمات داخلی */
             .property-img {
                 height: 12rem;
             }
@@ -143,7 +142,7 @@
                 padding: 0.375rem 0.75rem !important;
             }
         }
-        /* استایل Swiper برای هماهنگی با تم */
+        /* استایل Swiper */
         .swiper-button-next, .swiper-button-prev {
             color: #fbbf24 !important;
             background: rgba(0,0,0,0.5);
@@ -169,8 +168,9 @@
     </style>
 </head>
 <body class="relative">
-    <!-- پس‌زمینه متحرک با sample.jpg -->
+    <!-- پس‌زمینه متحرک -->
     <div class="bg-animation"></div>
+
     <!-- نوار بالا -->
     <nav class="navbar" id="navbar">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -184,6 +184,7 @@
             <button class="btn-premium btn-nav-contact text-white">تماس با مشاور VIP</button>
         </div>
     </nav>
+
     <!-- هیرو -->
     <section class="relative min-h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-20 lg:pt-32">
         <div class="max-w-6xl mx-auto">
@@ -203,24 +204,21 @@
                             <option>خانه باغ</option>
                         </select>
                         <input type="text" placeholder="از ۵ تا ۱۰۰ میلیارد" class="p-3 sm:p-4 bg-white/10 rounded-xl border border-white/20 focus:border-amber-400 focus:outline-none text-base">
-                        <button class="btn-premium text-white font-semibold">
-                            پیدا کن
-                        </button>
+                        <button class="btn-premium text-white font-semibold">پیدا کن</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- املاک لوکس - حالا به صورت اسلایدر با Swiper -->
+
+    <!-- املاک لوکس - اسلایدر -->
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-center mb-12 lg:mb-20 fade-in">
             <span class="text-amber-400">املاک</span> <span class="text-white">استثنایی</span>
         </h2>
 
-        <!-- Swiper Carousel -->
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <!-- اسلاید ۱ -->
                 <div class="swiper-slide">
                     <div class="property-card fade-in">
                         <div class="property-img">
@@ -235,7 +233,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- اسلاید ۲ -->
                 <div class="swiper-slide">
                     <div class="property-card fade-in">
                         <div class="property-img">
@@ -250,7 +247,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- اسلاید ۳ -->
                 <div class="swiper-slide">
                     <div class="property-card fade-in">
                         <div class="property-img">
@@ -265,27 +261,60 @@
                         </div>
                     </div>
                 </div>
-                <!-- می‌تونی اسلایدهای بیشتری اضافه کنی -->
             </div>
-            <!-- فلش‌های ناوبری -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-            <!-- دات‌های pagination -->
             <div class="swiper-pagination"></div>
         </div>
 
-        <!-- دکمه رفتن به گالری در پایین اسلایدر -->
         <div class="text-center mt-12">
             <button class="btn-premium text-lg px-12 py-4">رفتن به گالری کامل</button>
         </div>
     </section>
-    <!-- فوتر -->
+
+    <!-- فوتر جدید -->
     <footer class="bg-gradient-to-t from-black to-purple-950 py-12 lg:py-20 border-t border-purple-800">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="logo text-4xl lg:text-5xl mb-4 lg:mb-6">آشیان</h1>
-            <p class="text-lg lg:text-xl mb-6 lg:mb-10 opacity-80">تنها آدرس املاک لوکس و استثنایی ایران</p>
-            <button class="btn-premium text-base lg:text-lg px-8 lg:px-12 py-3 lg:py-4">مشاوره خصوصی ۲۴ ساعته</button>
-            <p class="mt-8 lg:mt-12 text-sm opacity-60">© ۱۴۰۴ املاک آشیان — تجربه‌ای فراتر از مالکیت</p>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-right">
+                <!-- ستون ۱: لوگو و توضیح -->
+                <div>
+                    <h1 class="logo text-4xl lg:text-5xl mb-6">آشیان</h1>
+                    <p class="text-lg opacity-80 mb-4">تنها آدرس املاک لوکس و استثنایی ایران</p>
+                    <p class="text-base opacity-70">تجربه‌ای فراتر از مالکیت، خانه‌ای ابدی از زیبایی</p>
+                </div>
+
+                <!-- ستون ۲: لینک‌های سریع -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-amber-400">لینک‌های سریع</h3>
+                    <div class="grid grid-cols-2 gap-4 text-base">
+                        <a href="#" class="hover:text-amber-400 transition">خانه</a>
+                        <a href="#" class="hover:text-amber-400 transition">املاک لوکس</a>
+                        <a href="#" class="hover:text-amber-400 transition">اجاره</a>
+                        <a href="#" class="hover:text-amber-400 transition">درباره ما</a>
+                        <a href="#" class="hover:text-amber-400 transition">تماس با ما</a>
+                        <a href="#" class="hover:text-amber-400 transition">حریم خصوصی</a>
+                    </div>
+                </div>
+
+                <!-- ستون ۳: تماس و شبکه‌های اجتماعی -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-amber-400">تماس با ما</h3>
+                    <p class="mb-3 opacity-80">تلفن: <a href="tel:+981111111111" class="hover:text-amber-400 transition">+98 111 111 1111</a></p>
+                    <p class="mb-8 opacity-80">ایمیل: <a href="mailto:gmail@gmail.com" class="hover:text-amber-400 transition">gmail@gmail.com</a></p>
+
+                    <div class="flex justify-center md:justify-end gap-6 mb-8">
+                        <a href="#" class="text-2xl hover:text-amber-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-2xl hover:text-amber-400 transition"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-2xl hover:text-amber-400 transition"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+
+                    <button class="btn-premium w-full md:w-auto text-base lg:text-lg px-8 py-4">مشاوره خصوصی ۲۴ ساعته</button>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 pt-8 border-t border-purple-800">
+                <p class="text-sm opacity-60">© ۱۴۰۴ املاک آشیان — تمامی حقوق محفوظ است</p>
+            </div>
         </div>
     </footer>
 
@@ -294,6 +323,7 @@
         window.addEventListener('scroll', () => {
             document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 100);
         });
+
         // fade-in انیمیشن
         const elements = document.querySelectorAll('.fade-in');
         const observer = new IntersectionObserver((entries) => {
@@ -303,34 +333,16 @@
         }, { threshold: 0.1 });
         elements.forEach(el => observer.observe(el));
 
-        // راه‌اندازی Swiper اسلایدر
+        // Swiper
         const swiper = new Swiper(".mySwiper", {
             loop: true,
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
             breakpoints: {
-                640: {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                },
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 30,
-                },
-                1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 40,
-                },
+                640: { slidesPerView: 1, spaceBetween: 20 },
+                768: { slidesPerView: 2, spaceBetween: 30 },
+                1024: { slidesPerView: 3, spaceBetween: 40 },
             },
         });
     </script>
