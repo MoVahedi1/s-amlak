@@ -4,384 +4,345 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>آشیان | املاک لوکس ایران</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Swiper CDN -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#fbf3db',
+                            300: '#f0dfa8',
+                            400: '#e4c465',
+                            500: '#d4af37', // Classic Gold
+                            600: '#aa8c2c',
+                        },
+                        dark: {
+                            900: '#050505',
+                            800: '#0a0a0f',
+                            700: '#12121a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
         body {
-            font-family: 'Vazirmatn', sans-serif;
-            background: #000;
-            color: #e2e8f0;
+            background-color: #050505;
+            color: #f8fafc;
             overflow-x: hidden;
         }
-        /* پس‌زمینه اصلی با sample.jpg */
-        .bg-animation {
+
+        /* پس‌زمینه ساده تیره */
+        .hero-bg {
             position: fixed;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(10, 0, 30, 0.8) 0%, rgba(60, 20, 100, 0.7) 50%, rgba(0, 0, 0, 0.9) 100%);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #050505; /* اگر عکس پس‌زمینه هم می‌خواهید default.png باشد اینجا تغییر دهید */
             z-index: -2;
         }
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('sample.jpg') center/cover no-repeat fixed;
-            opacity: 0.35;
-            animation: float 60s infinite linear;
+        
+        /* شیشه‌ای مدرن */
+        .glass-panel {
+            background: rgba(20, 20, 30, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
-        @keyframes float {
-            0% { transform: translateY(0) scale(1.05); }
-            100% { transform: translateY(-25%) scale(1.1); }
+
+        .glass-input {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
         }
-        .bg-animation::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 1;
+        .glass-input:focus {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
-        /* نوار بالا */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 999;
-            background: rgba(20, 10, 40, 0.5);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(168, 85, 247, 0.3);
-            padding: 1rem 0;
-            transition: all 0.4s;
-        }
-        .navbar.scrolled {
-            padding: 0.75rem 0;
-            background: rgba(20, 10, 40, 0.9);
-        }
-        .logo {
+
+        /* لوگو */
+        .logo-text {
             font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #f59e0b, #fbbf24, #fde047, #f59e0b);
+            background: linear-gradient(to right, #fbf3db, #d4af37, #fbf3db);
             -webkit-background-clip: text;
             background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
-        }
-        /* دکمه‌های اصلی */
-        .btn-primary {
-            background: linear-gradient(45deg, #8b5cf6, #ec4899);
-            padding: 0.6rem 1.8rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            font-size: 0.9375rem;
-            box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
-            transition: all 0.4s;
-        }
-        .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 60px rgba(236, 72, 153, 0.8);
-        }
-        .btn-secondary {
-            border: 2px solid #ec4899;
-            color: #ec4899;
-            padding: 0.6rem 1.8rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            font-size: 0.9375rem;
-            transition: all 0.4s;
-        }
-        .btn-secondary:hover {
-            background: #ec4899;
-            color: #fff;
-        }
-        /* منوی موبایل */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(10, 5, 30, 0.95);
-            backdrop-filter: blur(20px);
-            transform: translateY(-100%);
-            transition: transform 0.4s ease;
-            z-index: 998;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .mobile-menu.open {
-            transform: translateY(0);
-        }
-        .mobile-menu a {
-            font-size: 1.75rem;
-            font-weight: 500;
-            margin: 1rem 0;
-            color: #e2e8f0;
-            transition: color 0.3s;
-        }
-        .mobile-menu a:hover {
-            color: #fbbf24;
-        }
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 1.75rem;
-            color: #fbbf24;
-        }
-        @media (max-width: 1023px) {
-            .hamburger {
-                display: block;
-            }
-            .desktop-menu {
-                display: none;
-            }
-            .btn-nav {
-                padding: 0.5rem 1rem !important;
-                font-size: 0.875rem !important;
-            }
-        }
-        .property-img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            border-radius: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(60px);
-            transition: all 1.2s ease-out;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
         }
 
-        /* تنظیمات ویژه موبایل برای هیرو */
-        @media (max-width: 767px) {
-            .hero-section {
-                min-height: 75vh !important;
-                padding-top: 5rem !important;
-            }
-            .hero-title {
-                font-size: 2.5rem !important;
-                line-height: 1.1 !important;
-                margin-bottom: 1rem !important;
-            }
-            .hero-title span {
-                display: inline !important;
-            }
-            .hero-title .text-amber-400::after {
-                content: " ";
-            }
-            .hero-subtitle {
-                font-size: 1.125rem !important;
-                margin-bottom: 0.75rem !important;
-            }
-            .hero-special {
-                font-size: 1.375rem !important;
-                margin-bottom: 1.5rem !important;
-            }
-            .hero-buttons .btn-primary,
-            .hero-buttons .btn-secondary {
-                font-size: 1rem !important;
-                padding: 0.65rem 1.8rem !important;
-            }
-            .properties-title {
-                font-size: 2.5rem !important;
-                margin-bottom: 2rem !important;
-            }
+        /* دکمه لوکس */
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
         }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-outline-gold {
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            background: transparent;
+            transition: all 0.3s;
+        }
+        .btn-outline-gold:hover {
+            background: #d4af37;
+            color: #000;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* کارت ملک */
+        .property-card:hover { transform: translateY(-10px); }
+        .property-card:hover .card-img { transform: scale(1.1); }
+        .card-img-container { overflow: hidden; border-radius: 1rem 1rem 0 0; }
+        .card-img { transition: transform 0.7s ease; }
+
+        /* Swiper Customization */
+        .swiper-pagination-bullet { background: #fff; opacity: 0.5; }
+        .swiper-pagination-bullet-active { background: #d4af37; opacity: 1; width: 24px; border-radius: 4px; transition: width 0.3s; }
+        
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
-<body class="relative">
-    <!-- پس‌زمینه با sample.jpg -->
-    <div class="bg-animation"></div>
+<body class="antialiased selection:bg-gold-500 selection:text-black">
 
-    <!-- نوار بالا -->
-    <nav class="navbar" id="navbar">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <div class="logo">آشیان</div>
-            
-            <!-- منوی دسکتاپ -->
-            <div class="desktop-menu hidden lg:flex items-center gap-8 text-lg font-medium">
-                <a href="#" class="hover:text-amber-400 transition">خانه</a>
-                <a href="#" class="hover:text-amber-400 transition">گالری املاک</a>
-                <a href="#" class="hover:text-amber-400 transition">املاک لوکس</a>
-                <a href="#" class="hover:text-amber-400 transition">اجاره</a>
-                <a href="#" class="hover:text-amber-400 transition">درباره ما</a>
-                <a href="#" class="hover:text-amber-400 transition">تماس با ما</a>
+    <div class="hero-bg"></div>
+
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-black/80 backdrop-blur-md" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <button class="lg:hidden text-gold-400 text-2xl" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <a href="#" class="logo-text text-3xl font-black tracking-widest uppercase">ASHIAN</a>
+
+            <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#" class="hover:text-gold-400 transition-colors">صفحه اصلی</a>
+                <a href="#" class="hover:text-gold-400 transition-colors">پروژه‌های لوکس</a>
+                <a href="#" class="hover:text-gold-400 transition-colors">رهن و اجاره</a>
             </div>
 
-            <!-- دکمه تماس و همبرگر منو -->
-            <div class="flex items-center gap-4">
-                <button class="btn-primary btn-nav text-white" onclick="alert('فعلا کد نویسی این دکمه انجام نشده است')">تماس با مشاور VIP</button>
-                <div class="hamburger" id="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
+            <button class="hidden lg:block btn-gold text-black font-bold px-6 py-2.5 rounded-full text-sm">
+                <i class="fas fa-phone-alt ml-2"></i> مشاوره رایگان
+            </button>
+        </div>
+        
+        <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 transform translate-x-full transition-transform duration-300 lg:hidden flex flex-col items-center justify-center gap-8">
+            <button class="absolute top-6 right-6 text-white text-3xl" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+            <a href="#" class="text-xl text-white hover:text-gold-400">صفحه اصلی</a>
+            <a href="#" class="text-xl text-white hover:text-gold-400">املاک</a>
+            <a href="#" class="text-xl text-white hover:text-gold-400">تماس</a>
         </div>
     </nav>
 
-    <!-- منوی موبایل -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="#" onclick="closeMenu()">خانه</a>
-        <a href="#" onclick="closeMenu()">گالری املاک</a>
-        <a href="#" onclick="closeMenu()">املاک لوکس</a>
-        <a href="#" onclick="closeMenu()">اجاره</a>
-        <a href="#" onclick="closeMenu()">درباره ما</a>
-        <a href="#" onclick="closeMenu()">تماس با ما</a>
-        <button class="btn-primary mt-8 px-12 py-4" onclick="closeMenu(); alert('فعلا کد نویسی این دکمه انجام نشده است')">تماس با مشاور VIP</button>
-    </div>
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 relative">
+        <div class="absolute inset-0 z-[-1] opacity-30">
+            <img src="default.png" class="w-full h-full object-cover blur-sm">
+        </div>
 
-    <!-- هیرو -->
-    <section class="hero-section min-h-screen flex items-center justify-center text-center px-4 pt-20">
-        <div class="max-w-5xl mx-auto">
-            <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight mb-8 fade-in">
-                <span class="block text-amber-400 drop-shadow-2xl">خانه‌ای فراتر از رویاهات</span>
-                <span class="block text-white">در انتظار توست</span>
+        <div class="max-w-5xl mx-auto space-y-6 fade-up relative z-10">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
+                <span class="text-white drop-shadow-xl">رویای زندگی در</span><br>
+                <span class="logo-text text-5xl md:text-7xl lg:text-8xl mt-2 block">اوج آسمان</span>
             </h1>
-            <p class="hero-subtitle text-xl md:text-2xl mb-6 opacity-90 fade-in">آشیان — تنها آدرس املاک لوکس و استثنایی ایران</p>
-            <p class="hero-special text-2xl md:text-3xl font-bold text-amber-300 mb-12 fade-in">
-                تجربه‌ای فراتر از مالکیت
-            </p>
-            <div class="hero-buttons flex flex-col sm:flex-row gap-6 justify-center items-center fade-in">
-                <button class="btn-primary" onclick="alert('فعلا کد نویسی این دکمه انجام نشده است')">جستجوی ملک</button>
-                <button class="btn-secondary" onclick="alert('فعلا کد نویسی این دکمه انجام نشده است')">مشاهده گالری</button>
+        </div>
+
+        <div class="w-full max-w-5xl mt-12 fade-up relative z-10" style="transition-delay: 0.2s;">
+            
+            <button onclick="toggleSearch()" class="md:hidden w-full max-w-xs mx-auto mb-4 glass-panel border border-gold-500/50 text-gold-400 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-gold-500/10 transition">
+                <i class="fas fa-search"></i> جستجوی پیشرفته ملک
+                <i id="search-arrow" class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+
+            <div id="search-container" class="hidden md:block glass-panel p-4 rounded-2xl md:rounded-full mx-4 transition-all duration-300">
+                <form class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+                    
+                    <div class="md:col-span-4 relative group">
+                        <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" placeholder="جستجو در منطقه..." class="glass-input w-full rounded-xl md:rounded-full py-3.5 pr-10 pl-4 outline-none">
+                    </div>
+
+                    <div class="md:col-span-3 relative group">
+                        <select class="glass-input w-full rounded-xl md:rounded-full py-3.5 pr-10 pl-4 outline-none appearance-none cursor-pointer">
+                            <option class="bg-dark-800 text-gray-300">نوع ملک</option>
+                            <option class="bg-dark-800 text-white">پنت‌هاوس</option>
+                            <option class="bg-dark-800 text-white">ویلا</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute left-4 top-1/2 -translate-y-1/2 text-xs text-gray-500"></i>
+                    </div>
+
+                    <div class="md:col-span-3 relative group">
+                        <select class="glass-input w-full rounded-xl md:rounded-full py-3.5 pr-10 pl-4 outline-none appearance-none cursor-pointer">
+                            <option class="bg-dark-800 text-gray-300">بازه قیمت</option>
+                            <option class="bg-dark-800 text-white">لوکس</option>
+                            <option class="bg-dark-800 text-white">سوپر لوکس</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute left-4 top-1/2 -translate-y-1/2 text-xs text-gray-500"></i>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <button type="button" class="btn-gold w-full py-3.5 rounded-xl md:rounded-full text-black font-bold shadow-lg">
+                            بیابید
+                        </button>
+                    </div>
+
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- املاک برجسته -->
-    <section class="container mx-auto px-4 py-20">
-        <h2 class="properties-title text-4xl md:text-6xl font-black text-center mb-16 fade-in">
-            <span class="text-amber-400">املاک</span> <span class="text-white">استثنایی</span>
-        </h2>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-amber-500/30 text-center fade-in">
-                        <img src="Default.png" alt="پنت‌هاوس الماس زعفرانیه" class="property-img">
-                        <h3 class="text-2xl font-bold mb-4">پنت‌هاوس الماس زعفرانیه</h3>
-                        <p class="opacity-80 mb-6">۵۵۰ متر • تراس ۲۰۰ متری • ویو ۳۶۰ درجه تهران</p>
-                        <div class="bg-gradient-to-r from-amber-400 to-orange-500 text-black px-4 py-2 rounded-full font-semibold inline-block mb-6">۴۸ میلیارد</div>
-                        <button class="btn-primary" onclick="alert('فعلا کد نویسی این دکمه انجام نشده است')">مشاهده اختصاصی</button>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-amber-500/30 text-center fade-in">
-                        <img src="Default.png" alt="ویلا رویال لواسان" class="property-img">
-                        <h3 class="text-2xl font-bold mb-4">ویلا رویال لواسان</h3>
-                        <p class="opacity-80 mb-6">۲۰۰۰ متر باغ • استخر بی‌نهایت • هلی‌پد</p>
-                        <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full font-semibold inline-block mb-6">۱۱۰ میلیارد</div>
-                        <button class="btn-primary" onclick="alert('فعلا کد نویسی این دکمه انجام نشده است')">تور مجازی</button>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-amber-500/30 text-center fade-in">
-                        <img src="Default.png" alt="خانه باغ فرشته" class="property-img">
-                        <h3 class="text-2xl font-bold mb-4">خانه باغ فرشته</h3>
-                        <p class="opacity-80 mb-6">۱۲۰۰ متر زمین • بازسازی لوکس • استخر سرپوشیده</p>
-                        <div class="bg-gradient-to-r from-emerald-400 to-teal-500 text-black px-4 py-2 rounded-full font-semibold inline-block mb-6">۳۵ میلیارد</div>
-                        <button class="btn-primary" onclick="alert('فعلا کد نویسی این دکمه انجام نشده است')">تماس فوری</button>
-                    </div>
-                </div>
+    <section class="relative py-20 bg-dark-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 fade-up">
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-2">املاک <span class="text-gold-500">برگزیده</span></h2>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
 
-        <!-- دکمه زیر اسلایدر -->
-        <div class="text-center mt-12 fade-in">
-            <button class="btn-primary" onclick="alert('فعلا کد نویسی این دکمه انجام نشده است')">رفتن به گالری کامل</button>
+            <div class="swiper mySwiper pb-12 fade-up">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide h-auto">
+                        <div class="glass-panel rounded-2xl p-3 property-card h-full flex flex-col">
+                            <div class="card-img-container h-64 relative">
+                                <img src="default.png" class="card-img w-full h-full object-cover">
+                                <div class="absolute bottom-4 left-4 bg-gold-500 text-black px-3 py-1 rounded-lg text-sm font-black shadow-lg">
+                                    ۱۸۰ میلیارد
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col">
+                                <h3 class="text-xl font-bold text-white mb-2">عمارت نیاوران</h3>
+                                <p class="text-gray-400 text-sm mb-4">شاهکار معماری کلاسیک، ۸۰۰ متر بنا.</p>
+                                <button class="w-full py-3 mt-auto rounded-xl border border-gold-500/50 text-gold-400 hover:bg-gold-500 hover:text-black transition font-bold text-sm">
+                                    جزئیات کامل
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide h-auto">
+                        <div class="glass-panel rounded-2xl p-3 property-card h-full flex flex-col">
+                            <div class="card-img-container h-64 relative">
+                                <img src="default.png" class="card-img w-full h-full object-cover">
+                                <div class="absolute bottom-4 left-4 bg-gold-500 text-black px-3 py-1 rounded-lg text-sm font-black shadow-lg">
+                                    ۹۵ میلیارد
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col">
+                                <h3 class="text-xl font-bold text-white mb-2">ویلا مدرن</h3>
+                                <p class="text-gray-400 text-sm mb-4">طراحی مدرن سال ۲۰۲۴، فول امکانات.</p>
+                                <button class="w-full py-3 mt-auto rounded-xl border border-gold-500/50 text-gold-400 hover:bg-gold-500 hover:text-black transition font-bold text-sm">
+                                    جزئیات کامل
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="swiper-slide h-auto">
+                        <div class="glass-panel rounded-2xl p-3 property-card h-full flex flex-col">
+                            <div class="card-img-container h-64 relative">
+                                <img src="default.png" class="card-img w-full h-full object-cover">
+                                <div class="absolute bottom-4 left-4 bg-gold-500 text-black px-3 py-1 rounded-lg text-sm font-black shadow-lg">
+                                    ۴۲۰ میلیارد
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col">
+                                <h3 class="text-xl font-bold text-white mb-2">پنت‌هاوس رویال</h3>
+                                <p class="text-gray-400 text-sm mb-4">تراس گاردن ۳۰۰ متری با ویو ابدی.</p>
+                                <button class="w-full py-3 mt-auto rounded-xl border border-gold-500/50 text-gold-400 hover:bg-gold-500 hover:text-black transition font-bold text-sm">
+                                    جزئیات کامل
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-pagination !-bottom-0"></div>
+            </div>
+
+            <div class="text-center mt-8 fade-up">
+                <a href="#" class="inline-block px-12 py-4 rounded-full btn-outline-gold font-bold text-lg group overflow-hidden relative">
+                    <span class="relative z-10 flex items-center gap-2">
+                        مشاهده همه آگهی‌ها <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                    </span>
+                </a>
+            </div>
+
         </div>
     </section>
 
-    <!-- فوتر -->
-    <footer class="bg-gradient-to-t from-black to-purple-950 py-16 border-t border-purple-800">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-right">
-                <div>
-                    <h1 class="logo text-5xl mb-6">آشیان</h1>
-                    <p class="text-lg opacity-80">تنها آدرس املاک لوکس و استثنایی ایران</p>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold mb-6 text-amber-400">لینک‌های سریع</h3>
-                    <div class="space-y-3">
-                        <a href="#" class="block hover:text-amber-400 transition">خانه</a>
-                        <a href="#" class="block hover:text-amber-400 transition">گالری املاک</a>
-                        <a href="#" class="block hover:text-amber-400 transition">املاک لوکس</a>
-                        <a href="#" class="block hover:text-amber-400 transition">اجاره</a>
-                        <a href="#" class="block hover:text-amber-400 transition">درباره ما</a>
-                        <a href="#" class="block hover:text-amber-400 transition">تماس با ما</a>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold mb-6 text-amber-400">تماس با ما</h3>
-                    <p class="mb-4 opacity-80">تلفن: <a href="tel:+981111111111" class="hover:text-amber-400">+98 111 111 1111</a></p>
-                    <p class="mb-8 opacity-80">ایمیل: <a href="mailto:gmail@gmail.com" class="hover:text-amber-400">gmail@gmail.com</a></p>
-                    <div class="flex justify-center md:justify-end gap-6">
-                        <a href="#" class="text-3xl hover:text-amber-400"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-3xl hover:text-amber-400"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="text-3xl hover:text-amber-400"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-12 pt-8 border-t border-purple-800 text-sm opacity-60">
-                © ۱۴۰۴ املاک آشیان — تمامی حقوق محفوظ است
-            </div>
-        </div>
-    </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // اسکرول نوار
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 100);
-        });
-
-        // منوی موبایل
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
-            hamburger.innerHTML = mobileMenu.classList.contains('open') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-
-        function closeMenu() {
-            mobileMenu.classList.remove('open');
-            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        // Search Toggle for Mobile
+        function toggleSearch() {
+            const container = document.getElementById('search-container');
+            const arrow = document.getElementById('search-arrow');
+            
+            if (container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                container.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
         }
 
-        // fade-in
-        const elements = document.querySelectorAll('.fade-in');
+        // Mobile Menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if(menu.classList.contains('translate-x-full')) {
+                menu.classList.remove('translate-x-full');
+            } else {
+                menu.classList.add('translate-x-full');
+            }
+        }
+
+        // Animation on Scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
         }, { threshold: 0.1 });
-        elements.forEach(el => observer.observe(el));
 
-        // Swiper
-        const swiper = new Swiper(".mySwiper", {
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Swiper Config
+        new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 30,
             loop: true,
-            autoplay: { delay: 4000 },
-            pagination: { el: ".swiper-pagination", clickable: true },
-            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
             breakpoints: {
-                640: { slidesPerView: 1, spaceBetween: 20 },
-                768: { slidesPerView: 2, spaceBetween: 30 },
-                1024: { slidesPerView: 3, spaceBetween: 40 },
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
             },
         });
     </script>
