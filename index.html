@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آشیان | املاک لوکس ایران</title>
+    <title>آشیان | نهایت تجمل در املاک ایران</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -19,12 +19,15 @@
                     colors: {
                         gold: {
                             100: '#fbf3db',
+                            200: '#f5e6b5',
                             300: '#f0dfa8',
                             400: '#e4c465',
-                            500: '#d4af37',
+                            500: '#d4af37', // اصلی
                             600: '#aa8c2c',
+                            700: '#806820',
                         },
                         dark: {
+                            950: '#020202', // مشکی خالص‌تر
                             900: '#050505',
                             800: '#0a0a0f',
                             700: '#12121a',
@@ -32,7 +35,11 @@
                     },
                     fontFamily: {
                         sans: ['Vazirmatn', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
                     },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
                 }
             }
         }
@@ -47,7 +54,7 @@
             overflow-x: hidden;
         }
 
-        /* پس‌زمینه با تصویر لوکس */
+        /* --- Hero & Backgrounds --- */
         .hero-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -55,47 +62,85 @@
         }
         .hero-bg img {
             width: 100%; height: 100%; object-fit: cover;
-            filter: brightness(0.3) blur(2px); /* تاریک و کمی مات برای خوانایی متن */
-            transform: scale(1.1);
+            /* فیلتر ترکیبی برای کنتراست بهتر متون */
+            filter: brightness(0.4) contrast(1.1);
+            transform: scale(1.05);
+            animation: breathe 20s infinite alternate;
         }
-        
+        @keyframes breathe {
+            from { transform: scale(1.05); }
+            to { transform: scale(1.15); }
+        }
+
+        /* --- Glassmorphism Advanced --- */
         .glass-panel {
-            background: rgba(20, 20, 30, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(15, 15, 20, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
+        .glass-panel-light {
+             background: rgba(255, 255, 255, 0.03);
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
         .glass-input {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
             transition: all 0.3s;
         }
         .glass-input:focus {
             border-color: #d4af37;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
         }
 
+        /* --- Typography & Branding --- */
         .logo-text {
             font-family: 'Cinzel', serif;
-            background: linear-gradient(to right, #fbf3db, #d4af37, #fbf3db);
+            background: linear-gradient(to right, #fbf3db, #d4af37, #f0dfa8, #d4af37);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+            animation: shine 5s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
         }
 
+        .text-gradient-gold {
+            background: linear-gradient(180deg, #fff 0%, #d4af37 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* --- Buttons --- */
         .btn-gold {
-            background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #997b1f 100%);
+            position: relative;
+            overflow: hidden;
             transition: all 0.4s;
+            z-index: 1;
         }
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: linear-gradient(135deg, #f0dfa8 0%, #d4af37 100%);
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+        .btn-gold:hover::before { width: 100%; }
         .btn-gold:hover {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.4);
         }
-        
+
         .btn-outline-gold {
             border: 1px solid #d4af37;
             color: #d4af37;
@@ -105,164 +150,271 @@
         .btn-outline-gold:hover {
             background: #d4af37;
             color: #000;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
 
-        .property-card:hover { transform: translateY(-10px); }
+        /* --- Cards --- */
+        .property-card { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .property-card:hover { transform: translateY(-12px); }
         .property-card:hover .card-img { transform: scale(1.1); }
-        .card-img-container { overflow: hidden; border-radius: 1rem 1rem 0 0; }
-        .card-img { transition: transform 0.7s ease; }
-
-        .swiper-pagination-bullet { background: #fff; opacity: 0.5; }
-        .swiper-pagination-bullet-active { background: #d4af37; opacity: 1; width: 24px; border-radius: 4px; transition: width 0.3s; }
         
-        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .card-img-container { overflow: hidden; border-radius: 1rem 1rem 0 0; }
+        .card-img { transition: transform 0.8s ease; }
+
+        /* --- Swiper --- */
+        .swiper-pagination-bullet { background: #fff; opacity: 0.3; width: 10px; height: 10px; }
+        .swiper-pagination-bullet-active { background: #d4af37; opacity: 1; width: 30px; border-radius: 5px; transition: width 0.3s; }
+        
+        /* --- Animations --- */
+        .fade-up { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     </style>
 </head>
-<body class="antialiased selection:bg-gold-500 selection:text-black">
+<body class="antialiased selection:bg-gold-500 selection:text-black font-sans">
 
     <div class="hero-bg">
-        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop" alt="Luxury Background">
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2000&auto=format&fit=crop" alt="Luxury Mansion">
+        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent"></div>
     </div>
 
-    <nav class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-black/80 backdrop-blur-md" id="navbar">
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-black/60 backdrop-blur-md" id="navbar">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            
             <button class="lg:hidden text-gold-400 text-2xl" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </button>
 
-            <a href="#" class="logo-text text-3xl font-black tracking-widest uppercase">ASHIAN</a>
+            <a href="#" class="flex flex-col items-center">
+                <span class="logo-text text-3xl md:text-4xl font-black tracking-[0.2em] uppercase">ASHIAN</span>
+                <span class="text-[0.6rem] text-gold-200 tracking-[0.4em] uppercase opacity-70 hidden md:block">Real Estate Agency</span>
+            </a>
 
-            <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
-                <a href="#" class="hover:text-gold-400 transition-colors">صفحه اصلی</a>
-                <a href="#" class="hover:text-gold-400 transition-colors">پروژه‌های لوکس</a>
-                <a href="#" class="hover:text-gold-400 transition-colors">رهن و اجاره</a>
+            <div class="hidden lg:flex items-center gap-10 text-sm font-medium text-gray-300">
+                <a href="#" class="hover:text-gold-400 transition-colors relative group">
+                    صفحه اصلی
+                    <span class="absolute -bottom-2 right-0 w-0 h-0.5 bg-gold-400 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#" class="hover:text-gold-400 transition-colors relative group">
+                    پروژه‌های لوکس
+                    <span class="absolute -bottom-2 right-0 w-0 h-0.5 bg-gold-400 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#" class="hover:text-gold-400 transition-colors relative group">
+                    مشاوره سرمایه‌گذاری
+                    <span class="absolute -bottom-2 right-0 w-0 h-0.5 bg-gold-400 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#" class="hover:text-gold-400 transition-colors relative group">
+                    درباره ما
+                    <span class="absolute -bottom-2 right-0 w-0 h-0.5 bg-gold-400 transition-all group-hover:w-full"></span>
+                </a>
             </div>
 
-            <button class="hidden lg:block btn-gold text-black font-bold px-6 py-2.5 rounded-full text-sm">
-                <i class="fas fa-phone-alt ml-2"></i> مشاوره رایگان
+            <button class="hidden lg:flex items-center gap-2 btn-gold text-black font-bold px-7 py-3 rounded-none text-sm clip-path-slant">
+                <span>۰۲۱-۸۸۸۸۰۰۰۰</span>
+                <i class="fas fa-phone-alt animate-pulse"></i>
             </button>
         </div>
         
-        <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 transform translate-x-full transition-transform duration-300 lg:hidden flex flex-col items-center justify-center gap-8">
-            <button class="absolute top-6 right-6 text-white text-3xl" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
-            <a href="#" class="text-xl text-white hover:text-gold-400">صفحه اصلی</a>
-            <a href="#" class="text-xl text-white hover:text-gold-400">املاک</a>
-            <a href="#" class="text-xl text-white hover:text-gold-400">تماس</a>
+        <div id="mobile-menu" class="fixed inset-0 bg-dark-950/98 backdrop-blur-xl z-50 transform translate-x-full transition-transform duration-500 lg:hidden flex flex-col items-center justify-center gap-8">
+            <button class="absolute top-6 right-6 text-gold-500 text-3xl hover:rotate-90 transition-transform" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+            <span class="logo-text text-4xl mb-6">ASHIAN</span>
+            <a href="#" class="text-2xl text-white font-light hover:text-gold-400">صفحه اصلی</a>
+            <a href="#" class="text-2xl text-white font-light hover:text-gold-400">املاک ویژه</a>
+            <a href="#" class="text-2xl text-white font-light hover:text-gold-400">خدمات VIP</a>
+            <a href="#" class="text-2xl text-white font-light hover:text-gold-400">تماس با ما</a>
+            <div class="mt-8 flex gap-6 text-gold-400 text-2xl">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+            </div>
         </div>
     </nav>
 
-    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 relative">
-        <div class="max-w-5xl mx-auto space-y-6 fade-up relative z-10">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
-                <span class="text-white drop-shadow-xl">رویای زندگی در</span><br>
-                <span class="logo-text text-5xl md:text-7xl lg:text-8xl mt-2 block">اوج آسمان</span>
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-24 relative overflow-hidden">
+        
+        <div class="absolute top-1/4 left-10 w-px h-32 bg-gradient-to-b from-transparent via-gold-500 to-transparent opacity-50 hidden lg:block"></div>
+        <div class="absolute bottom-1/4 right-10 w-px h-32 bg-gradient-to-b from-transparent via-gold-500 to-transparent opacity-50 hidden lg:block"></div>
+
+        <div class="max-w-6xl mx-auto space-y-8 fade-up relative z-10">
+            <h2 class="text-gold-300 text-lg md:text-xl tracking-[0.3em] font-light uppercase">تعریف جدیدی از اصالت</h2>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight">
+                <span class="text-white drop-shadow-2xl">تجربه زندگی در</span><br>
+                <span class="logo-text text-6xl md:text-8xl lg:text-9xl mt-4 block filter drop-shadow-lg">اوج آسـمـان</span>
             </h1>
+            <p class="text-gray-300 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+                ارائه دهنده‌ی متمایزترین پنت‌هاوس‌ها، ویلاهای مدرن و عمارت‌های کلاسیک در لوکس‌ترین مناطق ایران.
+            </p>
         </div>
 
-        <div class="w-full max-w-5xl mt-12 fade-up relative z-10" style="transition-delay: 0.2s;">
+        <div class="w-full max-w-5xl mt-16 fade-up relative z-10" style="transition-delay: 0.2s;">
             
-            <button onclick="toggleSearch()" class="md:hidden w-full max-w-xs mx-auto mb-4 glass-panel border border-gold-500/50 text-gold-400 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-gold-500/10 transition">
-                <i class="fas fa-search"></i> جستجوی پیشرفته ملک
+            <button onclick="toggleSearch()" class="md:hidden w-full max-w-xs mx-auto mb-4 glass-panel border border-gold-500/30 text-gold-400 py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-gold-500/10 transition">
+                <i class="fas fa-search"></i> جستجوی هوشمند ملک
                 <i id="search-arrow" class="fas fa-chevron-down transition-transform duration-300"></i>
             </button>
 
-            <div id="search-container" class="hidden md:block glass-panel p-4 rounded-2xl md:rounded-full mx-4 transition-all duration-300">
-                <form class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+            <div id="search-container" class="hidden md:block glass-panel p-3 rounded-2xl mx-4 transition-all duration-300">
+                <form class="grid grid-cols-1 md:grid-cols-12 gap-2 items-center">
                     
-                    <div class="md:col-span-4 relative group">
-                        <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                        <input type="text" placeholder="جستجو در منطقه..." class="glass-input w-full rounded-xl md:rounded-full py-3.5 pr-10 pl-4 outline-none">
+                    <div class="md:col-span-4 relative group h-full">
+                        <div class="absolute right-4 top-1/2 -translate-y-1/2 text-gold-500"><i class="fas fa-search"></i></div>
+                        <input type="text" placeholder="نام منطقه یا محله..." class="glass-input w-full h-full rounded-xl py-4 pr-10 pl-4 outline-none placeholder-gray-400">
                     </div>
 
-                    <div class="md:col-span-3 relative group">
-                        <select class="glass-input w-full rounded-xl md:rounded-full py-3.5 pr-10 pl-4 outline-none appearance-none cursor-pointer">
-                            <option class="bg-dark-800 text-gray-300">نوع ملک</option>
-                            <option class="bg-dark-800 text-white">پنت‌هاوس</option>
-                            <option class="bg-dark-800 text-white">ویلا</option>
+                    <div class="md:col-span-3 relative group h-full">
+                        <select class="glass-input w-full h-full rounded-xl py-4 pr-10 pl-4 outline-none appearance-none cursor-pointer">
+                            <option class="bg-dark-800 text-gray-400">نوع ملک</option>
+                            <option class="bg-dark-800 text-white">پنت‌هاوس رویال</option>
+                            <option class="bg-dark-800 text-white">ویلا گاردن</option>
+                            <option class="bg-dark-800 text-white">آپارتمان دیپلمات</option>
                         </select>
-                        <i class="fas fa-chevron-down absolute left-4 top-1/2 -translate-y-1/2 text-xs text-gray-500"></i>
+                        <i class="fas fa-chevron-down absolute left-4 top-1/2 -translate-y-1/2 text-xs text-gold-500"></i>
                     </div>
 
-                    <div class="md:col-span-3 relative group">
-                        <select class="glass-input w-full rounded-xl md:rounded-full py-3.5 pr-10 pl-4 outline-none appearance-none cursor-pointer">
-                            <option class="bg-dark-800 text-gray-300">بازه قیمت</option>
-                            <option class="bg-dark-800 text-white">لوکس</option>
-                            <option class="bg-dark-800 text-white">سوپر لوکس</option>
+                    <div class="md:col-span-3 relative group h-full">
+                        <select class="glass-input w-full h-full rounded-xl py-4 pr-10 pl-4 outline-none appearance-none cursor-pointer">
+                            <option class="bg-dark-800 text-gray-400">بودجه تقریبی</option>
+                            <option class="bg-dark-800 text-white">+ ۵۰ میلیارد</option>
+                            <option class="bg-dark-800 text-white">+ ۱۰۰ میلیارد</option>
+                            <option class="bg-dark-800 text-white">+ ۵۰۰ میلیارد</option>
                         </select>
-                        <i class="fas fa-chevron-down absolute left-4 top-1/2 -translate-y-1/2 text-xs text-gray-500"></i>
+                        <i class="fas fa-chevron-down absolute left-4 top-1/2 -translate-y-1/2 text-xs text-gold-500"></i>
                     </div>
 
-                    <div class="md:col-span-2">
-                        <button type="button" class="btn-gold w-full py-3.5 rounded-xl md:rounded-full text-black font-bold shadow-lg">
-                            بیابید
+                    <div class="md:col-span-2 h-full">
+                        <button type="button" class="btn-gold w-full h-full py-4 rounded-xl text-black font-bold shadow-lg flex items-center justify-center gap-2">
+                            <span>جستجو</span>
+                            <i class="fas fa-arrow-left text-sm"></i>
                         </button>
                     </div>
 
                 </form>
             </div>
         </div>
+
+        <a href="#featured" class="absolute bottom-10 left-1/2 -translate-x-1/2 text-gold-400 animate-bounce cursor-pointer">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </a>
     </section>
 
-    <section class="relative py-20 bg-dark-900/80 backdrop-blur-sm">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 fade-up">
-                <h2 class="text-3xl md:text-4xl font-black text-white mb-2">املاک <span class="text-gold-500">برگزیده</span></h2>
+    <div class="bg-dark-900 border-b border-white/5 relative z-20">
+        <div class="container mx-auto px-6 py-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-x-reverse divide-white/10">
+                <div class="fade-up" style="transition-delay: 0s;">
+                    <p class="text-3xl font-bold text-white mb-1">۱۵+</p>
+                    <p class="text-gold-500 text-xs tracking-wider uppercase">سال تجربه</p>
+                </div>
+                <div class="fade-up" style="transition-delay: 0.1s;">
+                    <p class="text-3xl font-bold text-white mb-1">۲۵۰</p>
+                    <p class="text-gold-500 text-xs tracking-wider uppercase">فروش موفق</p>
+                </div>
+                <div class="fade-up" style="transition-delay: 0.2s;">
+                    <p class="text-3xl font-bold text-white mb-1">۸۰</p>
+                    <p class="text-gold-500 text-xs tracking-wider uppercase">پروژه انحصاری</p>
+                </div>
+                <div class="fade-up" style="transition-delay: 0.3s;">
+                    <p class="text-3xl font-bold text-white mb-1">۲۴/۷</p>
+                    <p class="text-gold-500 text-xs tracking-wider uppercase">پشتیبانی VIP</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="featured" class="relative py-24 bg-dark-900">
+        <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 fade-up">
+                <div>
+                    <h4 class="text-gold-500 font-bold tracking-widest mb-2 uppercase text-sm">مجموعه بی‌نظیر</h4>
+                    <h2 class="text-3xl md:text-5xl font-black text-white">املاک <span class="text-gradient-gold italic font-serif">برگـزیده</span></h2>
+                </div>
+                <a href="#" class="hidden md:inline-flex items-center gap-2 text-gray-400 hover:text-white transition group border-b border-transparent hover:border-gold-500 pb-1">
+                    مشاهده کلکسیون کامل <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform text-gold-500"></i>
+                </a>
             </div>
 
-            <div class="swiper mySwiper pb-12 fade-up">
+            <div class="swiper mySwiper pb-16 fade-up">
                 <div class="swiper-wrapper">
                     
                     <div class="swiper-slide h-auto">
-                        <div class="glass-panel rounded-2xl p-3 property-card h-full flex flex-col">
-                            <div class="card-img-container h-64 relative">
-                                <img src="https://images.unsplash.com/photo-1600596542815-2435db9c6ef7?q=80&w=600&auto=format&fit=crop" class="card-img w-full h-full object-cover">
-                                <div class="absolute bottom-4 left-4 bg-gold-500 text-black px-3 py-1 rounded-lg text-sm font-black shadow-lg">
-                                    ۱۸۰ میلیارد
+                        <div class="glass-panel-light rounded-none p-0 property-card h-full flex flex-col group overflow-hidden border border-white/5 hover:border-gold-500/30">
+                            <div class="card-img-container h-80 relative overflow-hidden">
+                                <img src="Default.png" class="card-img w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition duration-500"></div>
+                                <div class="absolute top-4 right-4 bg-dark-900/80 backdrop-blur text-gold-400 px-4 py-1 text-xs font-bold uppercase tracking-wider border border-gold-500/20">
+                                    فروش ویژه
+                                </div>
+                                <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/70 to-transparent">
+                                    <div class="text-2xl font-black text-white">۱۸۰ <span class="text-sm font-normal text-gray-300">میلیارد تومان</span></div>
                                 </div>
                             </div>
-                            <div class="p-4 flex-1 flex flex-col">
-                                <h3 class="text-xl font-bold text-white mb-2">عمارت نیاوران</h3>
-                                <p class="text-gray-400 text-sm mb-4">شاهکار معماری کلاسیک، ۸۰۰ متر بنا.</p>
-                                <button class="w-full py-3 mt-auto rounded-xl border border-gold-500/50 text-gold-400 hover:bg-gold-500 hover:text-black transition font-bold text-sm">
-                                    جزئیات کامل
+                            <div class="p-6 flex-1 flex flex-col bg-dark-800">
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-gold-400 transition">عمارت کلاسیک نیاوران</h3>
+                                <div class="flex items-center gap-4 text-gray-400 text-sm mb-6 border-b border-white/5 pb-4">
+                                    <span><i class="fas fa-bed text-gold-500 ml-1"></i> ۴ خواب</span>
+                                    <span><i class="fas fa-ruler-combined text-gold-500 ml-1"></i> ۸۰۰ متر</span>
+                                    <span><i class="fas fa-car text-gold-500 ml-1"></i> ۴ پارکینگ</span>
+                                </div>
+                                <button class="w-full py-3 mt-auto border border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-black transition uppercase text-sm font-bold tracking-wider">
+                                    بررسی ملک
                                 </button>
                             </div>
                         </div>
                     </div>
 
                     <div class="swiper-slide h-auto">
-                        <div class="glass-panel rounded-2xl p-3 property-card h-full flex flex-col">
-                            <div class="card-img-container h-64 relative">
-                                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=600&auto=format&fit=crop" class="card-img w-full h-full object-cover">
-                                <div class="absolute bottom-4 left-4 bg-gold-500 text-black px-3 py-1 rounded-lg text-sm font-black shadow-lg">
-                                    ۹۵ میلیارد
+                        <div class="glass-panel-light rounded-none p-0 property-card h-full flex flex-col group overflow-hidden border border-white/5 hover:border-gold-500/30">
+                            <div class="card-img-container h-80 relative overflow-hidden">
+                                 <img src="Default.png" class="card-img w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition duration-500"></div>
+                                <div class="absolute top-4 right-4 bg-dark-900/80 backdrop-blur text-white px-4 py-1 text-xs font-bold uppercase tracking-wider border border-white/20">
+                                    مدرن
+                                </div>
+                                <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/70 to-transparent">
+                                    <div class="text-2xl font-black text-white">۹۵ <span class="text-sm font-normal text-gray-300">میلیارد تومان</span></div>
                                 </div>
                             </div>
-                            <div class="p-4 flex-1 flex flex-col">
-                                <h3 class="text-xl font-bold text-white mb-2">ویلا مدرن</h3>
-                                <p class="text-gray-400 text-sm mb-4">طراحی مدرن سال ۲۰۲۴، فول امکانات.</p>
-                                <button class="w-full py-3 mt-auto rounded-xl border border-gold-500/50 text-gold-400 hover:bg-gold-500 hover:text-black transition font-bold text-sm">
-                                    جزئیات کامل
+                            <div class="p-6 flex-1 flex flex-col bg-dark-800">
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-gold-400 transition">ویلا مدرن لواسان</h3>
+                                <div class="flex items-center gap-4 text-gray-400 text-sm mb-6 border-b border-white/5 pb-4">
+                                    <span><i class="fas fa-bed text-gold-500 ml-1"></i> ۳ خواب</span>
+                                    <span><i class="fas fa-ruler-combined text-gold-500 ml-1"></i> ۵۵۰ متر</span>
+                                    <span><i class="fas fa-swimming-pool text-gold-500 ml-1"></i> استخر</span>
+                                </div>
+                                <button class="w-full py-3 mt-auto border border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-black transition uppercase text-sm font-bold tracking-wider">
+                                    بررسی ملک
                                 </button>
                             </div>
                         </div>
                     </div>
 
                      <div class="swiper-slide h-auto">
-                        <div class="glass-panel rounded-2xl p-3 property-card h-full flex flex-col">
-                            <div class="card-img-container h-64 relative">
-                                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=600&auto=format&fit=crop" class="card-img w-full h-full object-cover">
-                                <div class="absolute bottom-4 left-4 bg-gold-500 text-black px-3 py-1 rounded-lg text-sm font-black shadow-lg">
-                                    ۴۲۰ میلیارد
+                        <div class="glass-panel-light rounded-none p-0 property-card h-full flex flex-col group overflow-hidden border border-white/5 hover:border-gold-500/30">
+                            <div class="card-img-container h-80 relative overflow-hidden">
+                                <img src="Default.png" class="card-img w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition duration-500"></div>
+                                <div class="absolute top-4 right-4 bg-gold-500 text-black px-4 py-1 text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(212,175,55,0.5)]">
+                                    سوپر لوکس
+                                </div>
+                                <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/70 to-transparent">
+                                    <div class="text-2xl font-black text-white">۴۲۰ <span class="text-sm font-normal text-gray-300">میلیارد تومان</span></div>
                                 </div>
                             </div>
-                            <div class="p-4 flex-1 flex flex-col">
-                                <h3 class="text-xl font-bold text-white mb-2">پنت‌هاوس رویال</h3>
-                                <p class="text-gray-400 text-sm mb-4">تراس گاردن ۳۰۰ متری با ویو ابدی.</p>
-                                <button class="w-full py-3 mt-auto rounded-xl border border-gold-500/50 text-gold-400 hover:bg-gold-500 hover:text-black transition font-bold text-sm">
-                                    جزئیات کامل
+                            <div class="p-6 flex-1 flex flex-col bg-dark-800">
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-gold-400 transition">پنت‌هاوس الهیه</h3>
+                                <div class="flex items-center gap-4 text-gray-400 text-sm mb-6 border-b border-white/5 pb-4">
+                                    <span><i class="fas fa-bed text-gold-500 ml-1"></i> ۵ خواب</span>
+                                    <span><i class="fas fa-ruler-combined text-gold-500 ml-1"></i> ۹۰۰ متر</span>
+                                    <span><i class="fas fa-tree text-gold-500 ml-1"></i> روف گاردن</span>
+                                </div>
+                                <button class="w-full py-3 mt-auto border border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-black transition uppercase text-sm font-bold tracking-wider">
+                                    بررسی ملک
                                 </button>
                             </div>
                         </div>
@@ -271,20 +423,118 @@
                 </div>
                 <div class="swiper-pagination !-bottom-0"></div>
             </div>
-
-            <div class="text-center mt-8 fade-up">
-                <a href="#" class="inline-block px-12 py-4 rounded-full btn-outline-gold font-bold text-lg group overflow-hidden relative">
-                    <span class="relative z-10 flex items-center gap-2">
-                        مشاهده همه آگهی‌ها <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
-                    </span>
-                </a>
+            
+            <div class="text-center md:hidden">
+                <a href="#" class="btn-outline-gold px-8 py-3 rounded-full inline-block">مشاهده همه</a>
             </div>
 
         </div>
     </section>
 
+    <section class="py-24 bg-dark-800 relative border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-up">
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-4">خدمات <span class="text-gold-500">اختصاصی</span> آشیان</h2>
+                <p class="text-gray-400">ما فراتر از یک آژانس املاک هستیم؛ ما مشاور سبک زندگی لوکس شما هستیم.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-dark-900 border border-white/5 hover:border-gold-500/50 transition-colors group text-center fade-up">
+                    <div class="w-16 h-16 mx-auto bg-dark-800 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(212,175,55,0.1)]">
+                        <i class="fas fa-handshake text-2xl text-gold-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">مشاوره حقوقی رایگان</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">تیم حقوقی ما تمامی قراردادها را برای اطمینان از امنیت سرمایه شما بررسی می‌کند.</p>
+                </div>
+                
+                <div class="p-8 rounded-2xl bg-dark-900 border border-white/5 hover:border-gold-500/50 transition-colors group text-center fade-up" style="transition-delay: 0.1s;">
+                    <div class="w-16 h-16 mx-auto bg-dark-800 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(212,175,55,0.1)]">
+                        <i class="fas fa-camera text-2xl text-gold-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">عکاسی و تور مجازی</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">تولید محتوای حرفه‌ای و تور ۳۶۰ درجه برای نمایش بهتر ملک شما به خریداران خاص.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-dark-900 border border-white/5 hover:border-gold-500/50 transition-colors group text-center fade-up" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 mx-auto bg-dark-800 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(212,175,55,0.1)]">
+                        <i class="fas fa-gem text-2xl text-gold-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">ارزیابی دقیق قیمت</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">کارشناسی دقیق قیمت ملک بر اساس آخرین نوسانات بازار و پتانسیل منطقه.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black pt-20 pb-10 border-t border-gold-500/20 relative">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gold-500 shadow-[0_0_15px_#d4af37]"></div>
+
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                
+                <div class="md:col-span-4 space-y-6">
+                    <a href="#" class="logo-text text-4xl font-black tracking-widest block mb-4">ASHIAN</a>
+                    <p class="text-gray-500 leading-loose text-sm text-justify">
+                        آشیان نمادی از اعتماد و تجمل در صنعت املاک ایران است. ما پلی هستیم میان رویاهای شما و واقعیت زندگی در خانه‌ای که شایسته‌ی آن هستید.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:bg-gold-500 hover:text-black hover:border-gold-500 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:bg-gold-500 hover:text-black hover:border-gold-500 transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:bg-gold-500 hover:text-black hover:border-gold-500 transition"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 md:col-start-6">
+                    <h5 class="text-white font-bold mb-6 border-b border-gold-500/30 pb-2 inline-block">دسترسی سریع</h5>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-gold-400 transition">خرید ویلا</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition">اجاره پنت‌هاوس</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition">پروژه‌های تجاری</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition">وبلاگ خبری</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-2">
+                    <h5 class="text-white font-bold mb-6 border-b border-gold-500/30 pb-2 inline-block">شرکت</h5>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-gold-400 transition">درباره ما</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition">تماس با ما</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition">فرصت‌های شغلی</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition">قوانین و مقررات</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-3">
+                    <h5 class="text-white font-bold mb-6 border-b border-gold-500/30 pb-2 inline-block">تماس با دفتر مرکزی</h5>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-gold-500 mt-1"></i>
+                            <span>تهران، خیابان فرشته، برج آشیان، طبقه ۲۵</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-gold-500"></i>
+                            <span dir="ltr">021 - 88 88 00 00</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-gold-500"></i>
+                            <span>vip@ashian.agency</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <div class="border-t border-white/5 pt-8 text-center">
+                <p class="text-gray-600 text-xs">
+                    © ۲۰۲۴ تمامی حقوق برای آژانس املاک آشیان محفوظ است.
+                </p>
+            </div>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+        // Toggle Search Box
         function toggleSearch() {
             const container = document.getElementById('search-container');
             const arrow = document.getElementById('search-arrow');
@@ -298,15 +548,19 @@
             }
         }
 
+        // Toggle Mobile Menu
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             if(menu.classList.contains('translate-x-full')) {
                 menu.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden'; // Stop scrolling
             } else {
                 menu.classList.add('translate-x-full');
+                document.body.style.overflow = 'auto'; // Resume scrolling
             }
         }
 
+        // Intersection Observer for Fade Up Animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -317,12 +571,14 @@
 
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+        // Swiper Configuration
         new Swiper(".mySwiper", {
             slidesPerView: 1,
             spaceBetween: 30,
             loop: true,
+            speed: 1000, // Smoother transition
             autoplay: {
-                delay: 3500,
+                delay: 4000,
                 disableOnInteraction: false,
             },
             pagination: {
@@ -334,6 +590,22 @@
                 768: { slidesPerView: 2 },
                 1024: { slidesPerView: 3 },
             },
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-black/90', 'shadow-lg');
+                nav.classList.remove('bg-black/60', 'border-b');
+                nav.style.paddingTop = '10px';
+                nav.style.paddingBottom = '10px';
+            } else {
+                nav.classList.remove('bg-black/90', 'shadow-lg');
+                nav.classList.add('bg-black/60', 'border-b');
+                nav.style.paddingTop = '16px';
+                nav.style.paddingBottom = '16px';
+            }
         });
     </script>
 </body>
